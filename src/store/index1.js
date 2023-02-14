@@ -1,7 +1,5 @@
-import { configureStore, createSlice,createAction } from "@reduxjs/toolkit";
+import { configureStore, createSlice } from "@reduxjs/toolkit";
 
-
-export  const reset = createAction('app/reset');
 
 const moviesSlice = createSlice({
     name: "movie",
@@ -14,15 +12,10 @@ const moviesSlice = createSlice({
             const index = state.indexOf(action.payload);
             state.splice(index, 1);
         },
-        // reset(state, action) {
-        //     console.log('---------data logging--------',action);
-        //    return [];
-        // }
-    },
-    extraReducers(builder) {
-        builder.addCase(reset, (state, action) => {
-            return [];
-        });
+        reset(state, action) {
+            console.log('---------data logging--------',action);
+           return [];
+        }
     }
 
 });
@@ -40,14 +33,18 @@ const songsSlice = createSlice({
             const index = state.indexOf(action.payload);
             state.splice(index, 1);
         },
-        // reset(state, action) {
-        //     console.log('---------data logging--------',action);
-        //    return [];
-        // }
+        reset(state, action) {
+            console.log('---------data logging--------',action);
+           return [];
+        }
     },
     extraReducers(builder) {
-        builder.addCase(reset, (state, action) => {
-            console.log('---------data logging--------',state);
+        // builder.addCase("movie/reset", (state, action) => {
+        //     console.log('---------data logging--------',action);
+        //     return [];
+        // });
+        builder.addCase(moviesSlice.actions.reset.toString(), (state, action) => {
+            console.log('---------data logging--------',action);
             return [];
         });
     }
@@ -98,4 +95,6 @@ const store = configureStore({
 
 export { store };
 export const { addSong, removeSong, } = songsSlice.actions;
-export const { addMovie, removeMovie } = moviesSlice.actions;
+export const { addMovie, removeMovie, reset } = moviesSlice.actions;
+
+console.log('---------data logging--------',moviesSlice.actions.reset.toString());

@@ -9,11 +9,8 @@ import { reset } from "./store";
 export default function App() {
   const dispatch = useDispatch();
   const handleResetClick = () => {
-    dispatch(reset({
-        movies: [],
-        songs: []
-    }));
-    //
+    dispatch(reset());
+
   };
 
   return (
