@@ -39,7 +39,11 @@ const songsSlice = createSlice({
         }
     },
     extraReducers(builder) {
-        builder.addCase("movie/reset", (state, action) => {
+        // builder.addCase("movie/reset", (state, action) => {
+        //     console.log('---------data logging--------',action);
+        //     return [];
+        // });
+        builder.addCase(moviesSlice.actions.reset.toString(), (state, action) => {
             console.log('---------data logging--------',action);
             return [];
         });
@@ -90,5 +94,7 @@ const store = configureStore({
 // console.log(JSON.stringify(finalStates));
 
 export { store };
-export const { addSong, removeSong } = songsSlice.actions;
+export const { addSong, removeSong, } = songsSlice.actions;
 export const { addMovie, removeMovie, reset } = moviesSlice.actions;
+
+console.log('---------data logging--------',moviesSlice.actions.reset.toString());
