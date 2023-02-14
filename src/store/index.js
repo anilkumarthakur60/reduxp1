@@ -1,5 +1,26 @@
 import { configureStore, createSlice } from "@reduxjs/toolkit";
 
+
+const moviesSlice = createSlice({
+    name: "movie",
+    initialState: [],
+    reducers: {
+        addMovie(state, action) {
+            state.push(action.payload);
+        },
+        removeMovie(state, action) {
+            const index = state.indexOf(action.payload);
+            state.splice(index, 1);
+        },
+        reset(state, action) {
+            console.log('---------data logging--------',action);
+           return [];
+        }
+    }
+
+});
+
+
 const songsSlice = createSlice({
     name: "song",
     initialState: [],
@@ -13,33 +34,16 @@ const songsSlice = createSlice({
             state.splice(index, 1);
         },
         reset(state, action) {
-            return {
-                ...state, songs: []
-            }
-
-        },
-    },
-});
-
-const moviesSlice = createSlice({
-    name: "movie",
-    initialState: [],
-    reducers: {
-        addMovie(state, action) {
-            state.push(action.payload);
-        },
-
-        removeMovie(state, action) {
-            const index = state.indexOf(action.payload);
-            state.splice(index, 1);
-        },
-
-        reset(state, action) {
-            return {
-                ...state, movies: []
-            }
+            console.log('---------data logging--------',action);
+           return [];
         }
     },
+    extraReducers(builder) {
+        builder.addCase("movie/reset", (state, action) => {
+            console.log('---------data logging--------',action);
+            return [];
+        });
+    }
 });
 
 const store = configureStore({
