@@ -1,40 +1,52 @@
 import { configureStore, createSlice } from "@reduxjs/toolkit";
 
 const songsSlice = createSlice({
-  name: "song",
-  initialState: [],
-  reducers: {
-    addSong(state, action) {
-      state.push(action.payload);
-    },
+    name: "song",
+    initialState: [],
+    reducers: {
+        addSong(state, action) {
+            state.push(action.payload);
+        },
 
-    removeSong(state, action) {
-      const index = state.indexOf(action.payload);
-      state.splice(index, 1);
-    }
-  }
+        removeSong(state, action) {
+            const index = state.indexOf(action.payload);
+            state.splice(index, 1);
+        },
+        reset(state, action) {
+            return {
+                ...state, songs: []
+            }
+
+        },
+    },
 });
 
 const moviesSlice = createSlice({
-  name: "movie",
-  initialState: [],
-  reducers: {
-    addMovie(state, action) {
-      state.push(action.payload);
-    },
+    name: "movie",
+    initialState: [],
+    reducers: {
+        addMovie(state, action) {
+            state.push(action.payload);
+        },
 
-    removeMovie(state, action) {
-      const index = state.indexOf(action.payload);
-      state.splice(index, 1);
-    }
-  }
+        removeMovie(state, action) {
+            const index = state.indexOf(action.payload);
+            state.splice(index, 1);
+        },
+
+        reset(state, action) {
+            return {
+                ...state, movies: []
+            }
+        }
+    },
 });
 
 const store = configureStore({
-  reducer: {
-    songs: songsSlice.reducer,
-    movies: moviesSlice.reducer
-  }
+    reducer: {
+        songs: songsSlice.reducer,
+        movies: moviesSlice.reducer,
+    },
 });
 
 // const statingState = store.getState();
@@ -75,4 +87,4 @@ const store = configureStore({
 
 export { store };
 export const { addSong, removeSong } = songsSlice.actions;
-export const { addMovie, removeMovie } = moviesSlice.actions;
+export const { addMovie, removeMovie, reset } = moviesSlice.actions;
